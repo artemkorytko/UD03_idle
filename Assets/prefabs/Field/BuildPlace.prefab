@@ -137,6 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4883057646891340319}
+  - component: {fileID: 2526496894731421003}
   m_Layer: 0
   m_Name: BuildPlace
   m_TagString: Untagged
@@ -162,6 +163,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2526496894731421003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883057646891340288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79060fed9daa4eaca598d7801916cf84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 056a204060042164aab76d5a80bd09f5, type: 2}
+  buildingParent: {fileID: 4883057646616050432}
 --- !u!1001 &4404970776541660382
 PrefabInstance:
   m_ObjectHideFlags: 0
