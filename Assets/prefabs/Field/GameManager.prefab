@@ -65,6 +65,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2136215690158687966}
     m_Modifications:
+    - target: {fileID: 4311366628066221923, guid: 46eaa9b5ac6803c4eac3afcf7c49c385, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921186835571462373, guid: 46eaa9b5ac6803c4eac3afcf7c49c385, type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 0fc0728fed5a4c3408bea67635d2265e, type: 2}
+    - target: {fileID: 5921186836241731048, guid: 46eaa9b5ac6803c4eac3afcf7c49c385, type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 7679fe920f8d224488ff1e28dfd20e06, type: 2}
+    - target: {fileID: 5921186836994784634, guid: 46eaa9b5ac6803c4eac3afcf7c49c385, type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 32b438406aa7cce49996eb16d11a2c0d, type: 2}
     - target: {fileID: 8152539537916312337, guid: 46eaa9b5ac6803c4eac3afcf7c49c385, type: 3}
       propertyPath: m_Name
       value: GameField

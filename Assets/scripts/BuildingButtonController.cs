@@ -49,4 +49,16 @@ public class BuildingButtonController : MonoBehaviour
         costText.text = cost.ToString();
         _cost = cost;
     }
+
+    public void ButtonActive(bool isActive)
+    {
+        if (isActive)
+        {
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
 }

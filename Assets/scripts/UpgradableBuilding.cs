@@ -74,6 +74,15 @@ public class UpgradableBuilding : MonoBehaviour
                 UpdateButtonState();
         }
 
+        public void ResetProgress()
+        {
+                Level = 0;
+                Destroy(_currentModel);
+                IsUnlock = false;
+                _button.ButtonActive(true);
+                _button.UpdateButton("BUY", config.UnlockPrice);
+        }
+
         private void SetModel(int level)
         {
                 var upgradeConfig = config.GetUpgrade(level);
@@ -101,6 +110,9 @@ public class UpgradableBuilding : MonoBehaviour
                 {
                         _button.UpdateButton("UPGRADE", GetCost(Level));
                 }
+                
+                if (Level==3)
+                        _button.ButtonActive(false);
         }
 
         private float GetCost(int level)

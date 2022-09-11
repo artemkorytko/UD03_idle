@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
         private FieldManager _fieldManager;
         private float _money;
         private GameData _gameData;
+        private UiController _uiController;
 
         public static event Action<float> OnMoneyValueChanged; 
 
@@ -28,12 +29,14 @@ public class GameManager : MonoBehaviour
 
         private void Awake()
         {
+                _uiController = FindObjectOfType<UiController>();
                 _saveSystem = GetComponent<SaveSystem>();
                 _fieldManager = GetComponentInChildren<FieldManager>();
         }
 
         private void Start()
         {
+                _uiController.OnResetClick += ResetProgress;
                 _fieldManager.OnMoneyAdd += OnMoneyAdd;
                 _fieldManager.OnMoneySpend += OnMoneySpend;
                 _saveSystem.Initialize();
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
 
         private void OnDestroy()
         {
+                _uiController.OnResetClick -= ResetProgress;
                 _fieldManager.OnMoneyAdd -= OnMoneyAdd;
                 _fieldManager.OnMoneySpend -= OnMoneySpend;
         }
@@ -68,5 +72,12 @@ public class GameManager : MonoBehaviour
                 _gameData.Money = _money;
                 _gameData.BuildingData = _fieldManager.GetBuildingData();
                 _saveSystem.SaveData();
+        }
+
+        private void ResetProgress()
+        {
+                _fieldManager.ResetProgress();
+                _money = 60;
+                Money = _money;
         }
 }

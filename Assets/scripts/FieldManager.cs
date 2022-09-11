@@ -40,6 +40,14 @@ public class FieldManager : MonoBehaviour
                 }
         }
 
+        public void ResetProgress()
+        {
+                foreach (var buildingsData in _upgradableBuildings)
+                {
+                        buildingsData.ResetProgress();
+                }
+        }
+
         public BuildingData[] GetBuildingData()
         {
                 var data = new BuildingData[GameData.BUILDING_COUNT];
