@@ -36,11 +36,24 @@ public class SaveSystem : MonoBehaviour
 [Serializable]
 public class GameData
 {
-    public float Money = 60;
+    public const int BUILDING_COUNT = 4;
+    public const int MONEY_BY_DEFAULT = 60;
+    public float Money;
+    public BuildingData[] BuildingData;
 
     public void UpdateMoney(float value)
     {
         Money = value;
+    }
+
+    public GameData()
+    {
+        Money = MONEY_BY_DEFAULT;
+        BuildingData = new BuildingData[BUILDING_COUNT];
+        for (int i = 0; i < BUILDING_COUNT; i++)
+        {
+            BuildingData[i] = new BuildingData();
+        }
     }
 }
 
