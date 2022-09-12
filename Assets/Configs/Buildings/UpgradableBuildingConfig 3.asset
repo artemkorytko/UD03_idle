@@ -16,4 +16,13 @@ MonoBehaviour:
   defaultUpgrateCost: 10
   costMultiplayer: 1.7
   configs:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 894ebc9d19920f543921d211d26c0a5c, type: 2}
+  - {fileID: 11400000, guid: 0c24b23edf77fdc43884975473fd936c, type: 2}
+  - {fileID: 11400000, guid: 9832f73c5fcd8fc47825205dbdb0cec7, type: 2}
+  - {fileID: 11400000, guid: 452574a19a0f8754495d438a4e32f810, type: 2}
+  - {fileID: 11400000, guid: 3b8469fe44737a14e95edec30ea95052, type: 2}
+  - {fileID: 11400000, guid: b3245a65fbb007e4f8aace02fdf5015b, type: 2}
+  - {fileID: 11400000, guid: 69a847b45d15e1f4a9dfead65d2707e7, type: 2}
+  - {fileID: 11400000, guid: 1ec9fc582e9bdf545be4fe1503f9a25e, type: 2}
+  - {fileID: 11400000, guid: 1dc51ff7c58b6a447941b83623dd5009, type: 2}
+  - {fileID: 11400000, guid: 8078da40cf93c1a48a8bf058d0e922ac, type: 2}
