@@ -106,6 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4579388634171671377}
+  - component: {fileID: 897295495311366565}
   m_Layer: 0
   m_Name: BildPlace
   m_TagString: Untagged
@@ -131,6 +132,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &897295495311366565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127683271168729816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170d966509014bb092a3cf2326adbc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 42d783bc65c45e948a0e16d402830d7e, type: 2}
+  buildingParent: {fileID: 2047913817704903479}
 --- !u!1 &6338154750525298211
 GameObject:
   m_ObjectHideFlags: 0

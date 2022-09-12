@@ -24,7 +24,7 @@ namespace Idle
 
         public void LoadData()
         {
-            string data = JsonUtility.GetString(SAVE_KEY);
+            string data = PlayerPrefs.GetString(SAVE_KEY);
             _gameData = JsonUtility.FromJson<GameData>(data);
         }
 
@@ -35,14 +35,28 @@ namespace Idle
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class GameData
     {
-        public float Money = 60;
+        public const int BUILDING_COUNT = 4;
+        public const int MONEY_BY_DEFAULT = 60;
+        public float Money;
+        public BuldingData[] BuldingData; 
+        
 
         public void UpdateMoney(float value)
         {
             Money = value;
+        }
+
+        public GameData()
+        {
+            Money = MONEY_BY_DEFAULT;
+            BuldingData = new BuldingData[BUILDING_COUNT];
+            for (int i = 0; i < BUILDING_COUNT; i++)
+            {
+                BuldingData[i] = new BuldingData();
+            }
         }
     }
 }
