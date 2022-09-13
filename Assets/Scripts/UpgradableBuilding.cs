@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Idle
 {
@@ -23,18 +25,18 @@ namespace Idle
         private void Awake()
         {
             _button = GetComponentInChildren<BuildingButtonController>();
-            GameManager.OnMoneyValueChange += OnMoneyChanged;
         }
 
         private void Start()
         {
             _button.OnClick += OnButtonClick;
+            GameManager.Instance.OnMoneyValueChange += OnMoneyChanged;
         }
 
         private void OnDestroy()
         {
             _button.OnClick -= OnButtonClick;
-            GameManager.OnMoneyValueChange -= OnMoneyChanged;
+            GameManager.Instance.OnMoneyValueChange -= OnMoneyChanged;
         }
 
         private void OnButtonClick()
@@ -62,16 +64,16 @@ namespace Idle
             }
         }
 
-        private void SetModel(int level)
+        private async void SetModel(int level)
         {
             var upgradeConfig = config.GetUpgrade(level);
 
             if (_currentModel != null)
             {
-                Destroy(_currentModel);
+                Addressables.ReleaseInstance(_currentModel);
             }
 
-            _currentModel = Instantiate(upgradeConfig.Model, buildingParent);
+            _currentModel = await Addressables.InstantiateAsync(upgradeConfig.Model, buildingParent);
             _currentModel.transform.localPosition = Vector3.zero;
 
             if (_timerCoroutine == null)
@@ -122,6 +124,7 @@ namespace Idle
             }
 
             UpdateButtonState();
+            OnMoneyChanged(GameManager.Instance.Money);
         }
     }
 }

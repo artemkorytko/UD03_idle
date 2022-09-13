@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e54714b4ae41649521ffaf8e68a959, type: 3}
   m_Name: UpgradableBuildingConfig_2
   m_EditorClassIdentifier: 
-  configs: []
+  unlockPrice: 50
+  defaultUpgradeCost: 10
+  costMultiplier: 1.7
+  configs:
+  - {fileID: 11400000, guid: ac3b5b664f7924678abf27da0636c3f5, type: 2}
+  - {fileID: 11400000, guid: 405a593e1e5284f1394494b99afd76e2, type: 2}
+  - {fileID: 11400000, guid: 488d142d413824203a4dd7a4e3544be1, type: 2}

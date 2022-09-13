@@ -19,8 +19,8 @@ namespace Idle
         {
             foreach (var building in _upgradableBuildings)
             {
-                building.OnProcessFinished += OnMoneyAdd;
-                building.OnMoneySpend += OnMoneySpend;
+                building.OnProcessFinished += OnMoneyAdded;
+                building.OnMoneySpend += OnMoneySpended;
             }
         }
 
@@ -28,9 +28,19 @@ namespace Idle
         {
             foreach (var building in _upgradableBuildings)
             {
-                building.OnProcessFinished -= OnMoneyAdd;
-                building.OnMoneySpend -= OnMoneySpend;
+                building.OnProcessFinished -= OnMoneyAdded;
+                building.OnMoneySpend -= OnMoneySpended;
             }
+        }
+
+        private void OnMoneyAdded(int value)
+        {
+            OnMoneyAdd?.Invoke(value);
+        }
+
+        private void OnMoneySpended(float value)
+        {
+            OnMoneySpend?.Invoke(value);
         }
 
         public void Initialize(GameData gameData)
