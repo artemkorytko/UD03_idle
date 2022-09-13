@@ -64,11 +64,20 @@ namespace Idle
             _fieldManager.Initialize(_gameData);
         }
 
+#if !UNITY_EDITOR
+         private void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus)
+            {
+                SaveState();
+            }
+        }
+#else
         private void OnApplicationQuit()
         {
             SaveState();
         }
-
+#endif
         private void OnDestroy()
         {
             _fieldManager.OnMoneyAdd -= OnMoneyAdd;
@@ -88,9 +97,15 @@ namespace Idle
 
         private void SaveState()
         {
-            _gameData.Money = _money;
+            _gameData.Money = Money;
             _gameData.BuildingData = _fieldManager.GetBuildingData();
-            _saveSystem.SaveData();
+            // _saveSystem.SaveData();
+            _saveSystem.SaveDataBin();
+        }
+
+        public void DoQuit()
+        {
+            Application.Quit();
         }
     }
 }

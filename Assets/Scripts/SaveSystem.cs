@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace Idle
@@ -8,20 +10,23 @@ namespace Idle
         private const string SAVE_KEY = "GameData";
 
         private GameData _gameData;
-
+        private string _filePath;
         public GameData GameData => _gameData;
-
-        private void Awake()
-        {
-            _gameData = new GameData();
-            SaveData();
-        }
-
+        
         public void Initialize()
         {
-            if (PlayerPrefs.HasKey(SAVE_KEY))
+            // if (PlayerPrefs.HasKey(SAVE_KEY))
+            // {
+            //     LoadData();
+            // }
+            // else
+            // {
+            //     _gameData = new GameData();
+            // }
+            _filePath = Application.persistentDataPath + "/save.data";
+            if (File.Exists(_filePath))
             {
-                LoadData();
+                LoadDataBin();
             }
             else
             {
@@ -29,7 +34,7 @@ namespace Idle
             }
         }
 
-        public void LoadData()
+        private void LoadData()
         {
             string data = PlayerPrefs.GetString(SAVE_KEY, string.Empty);
             _gameData = JsonUtility.FromJson<GameData>(data);
@@ -39,6 +44,24 @@ namespace Idle
         {
             string json = JsonUtility.ToJson(_gameData);
             PlayerPrefs.SetString(SAVE_KEY, json);
+        }
+
+        private void LoadDataBin()
+        {
+            FileStream dataStream = new FileStream(_filePath, FileMode.Open);
+
+            BinaryFormatter converter = new BinaryFormatter();
+            _gameData = converter.Deserialize(dataStream) as GameData;
+            dataStream.Close();
+        }
+
+        public void SaveDataBin()
+        {
+            FileStream dataStream = new FileStream(_filePath, FileMode.Create);
+
+            BinaryFormatter converter = new BinaryFormatter();
+            converter.Serialize(dataStream, _gameData);
+            dataStream.Close();
         }
     }
 
@@ -66,4 +89,3 @@ namespace Idle
         }
     }
 }
-
