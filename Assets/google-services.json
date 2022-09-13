@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "845530296351",
+    "firebase_url": "https://ud03-test-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ud03-test",
+    "storage_bucket": "ud03-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845530296351:android:be107df051ef2a48cf652a",
+        "android_client_info": {
+          "package_name": "com.korytko.UD03_idle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845530296351-aqfd1nj3kp14fu6gqsr8ulkivd9331og.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjb2OH0CwMlpRHkJ4tSjNiUewC0I8MKyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845530296351-aqfd1nj3kp14fu6gqsr8ulkivd9331og.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

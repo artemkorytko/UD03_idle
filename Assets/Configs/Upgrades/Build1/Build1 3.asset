@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e301879b4d4111b791c1534c29f937, type: 3}
   m_Name: Build1 3
   m_EditorClassIdentifier: 
-  model: {fileID: 7555189719200500296, guid: 66493ea71b1ec47bea6efa568cb621ee, type: 3}
+  model:
+    m_AssetGUID: 66493ea71b1ec47bea6efa568cb621ee
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   processResult: 1

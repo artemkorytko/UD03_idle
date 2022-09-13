@@ -16,7 +16,15 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: fcb7c04611ef2421ab568a4c393857f1
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 66493ea71b1ec47bea6efa568cb621ee
+    m_Address: Assets/Prefabs/Buildings/computer_store_mobile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e3efc64ab9ab9402981e9f318833e9be
+    m_Address: Assets/Prefabs/Buildings/industrial_factory_mobile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7f810f9b9457643fabe1778097c325cd, type: 2}
   m_SchemaSet:
