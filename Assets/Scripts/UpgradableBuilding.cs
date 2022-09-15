@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 public class UpgradableBuilding : MonoBehaviour
@@ -23,18 +25,18 @@ public class UpgradableBuilding : MonoBehaviour
     private void Awake()
     {
         _button = GetComponentInChildren<BuildingButtonController>();
-        GameManager.OnMoneyValueChange += OnMoneyChanged;
     }
 
     private void Start()
     {
         _button.OnClick += OnButtonClick;
+        GameManager.Instance.OnMoneyValueChange += OnMoneyChanged;
     }
 
     private void OnDestroy()
     {
         _button.OnClick -= OnButtonClick;
-        GameManager.OnMoneyValueChange -= OnMoneyChanged;
+        GameManager.Instance.OnMoneyValueChange -= OnMoneyChanged;
     }
 
     private void OnButtonClick()
@@ -81,15 +83,15 @@ public class UpgradableBuilding : MonoBehaviour
         return (float)Math.Round(config.DefaultUpgradeCoast * Math.Pow(config.CostMultiplier, level), 2);
     }
 
-    private void SetModel(int level)
+    private async void SetModel(int level)
     {
         var upgradeConfig = config.GetUpgrade(level);
         if (_currentModel != null)
         {
-            Destroy(_currentModel);
+            Addressables.ReleaseInstance(_currentModel);
         }
 
-        _currentModel = Instantiate(upgradeConfig.Model, buildingParent);
+        _currentModel = await Addressables.InstantiateAsync(upgradeConfig.Model, buildingParent);
 
         if(_timerCoroutine==null)
             _timerCoroutine = StartCoroutine(Timer());
@@ -101,7 +103,6 @@ public class UpgradableBuilding : MonoBehaviour
         {
             yield return new WaitForSeconds(TIMER_DELAY);
             OnProcessFinished?.Invoke(config.GetUpgrade(Level).ProcessResult);
-            print("tick");
         }
     }
 
@@ -121,6 +122,7 @@ public class UpgradableBuilding : MonoBehaviour
         }
 
         UpdateButtonState();
+        OnMoneyChanged(GameManager.Instance.Money);
     }
     
 }

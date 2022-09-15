@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 44417067a45e6f942b802abf97c8a0e9
+  m_SerializeEntries:
+  - m_GUID: bc3acaa989345d24e8b09eac0fd6516e
+    m_Address: Assets/Prefabs/Buildings/sawmill.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 51b79e679e226cd478a5ebb9b07acb06
+    m_Address: Assets/Prefabs/Buildings/electronic_store.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b9de1cf2f9412c149a49c3a60de113cb
+    m_Address: Assets/Prefabs/Buildings/electronics_factory.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b745532e76e31c642b68af18d564cfd2
+    m_Address: Assets/Prefabs/Buildings/toy_factory.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 60810f98ad8a65148b9693d4e732620b
+    m_Address: Assets/Prefabs/Buildings/appliances_factory.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9a7fc073fc9ea674288eae45b9dbd4e9
+    m_Address: Assets/Prefabs/Buildings/industrial_factory.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 37d9b73296b8d2645929b5b746ff6878, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 168b8de5aa33e1b47a101fed594cdfb9, type: 2}
+    - {fileID: 11400000, guid: 5119929a8ab692e4cb704fe18917e5c6, type: 2}

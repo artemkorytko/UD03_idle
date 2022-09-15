@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+    
     private SaveSystem _saveSystem;
     private FieldManager _fieldManager;
-
+    private UIController _uiController;
     private float _money;
     private GameData _gameData;
 
-    public static event Action<float> OnMoneyValueChange;
+    public event Action<float> OnMoneyValueChange;
 
     public float Money
     {
@@ -27,36 +29,67 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private async void Awake()
     {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
         _saveSystem = GetComponent<SaveSystem>();
         _fieldManager = GetComponentInChildren<FieldManager>();
+        _uiController = FindObjectOfType<UIController>();
+        await _saveSystem.Initialize();
+        _gameData = _saveSystem.GameData;
+        Money = _gameData.Money;
     }
 
     private void Start()
     {
         _fieldManager.OnMoneyAdd += OnMoneyAdd;
         _fieldManager.OnMoneySpend += OnMoneySpend;
-        _saveSystem.Initialize();
-        _gameData = _saveSystem.GameData;
-        _fieldManager.Initialize(_gameData);
-        Money = _gameData.Money;
+        _uiController.ShowMenuScreen();
+        _uiController.OnStartGameButtonClick += StartGame;
     }
 
+    private void StartGame()
+    {
+        _fieldManager.Initialize(_gameData);
+        _uiController.ShowGameScreen();
+    }
+    
+#if !UNITY_EDITOR
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            SaveState();
+        }
+    }
+#else
+    
     private void OnApplicationQuit()
     {
         SaveState();
     }
+    
+#endif
+    
 
     private void OnDestroy()
     {
         _fieldManager.OnMoneyAdd -= OnMoneyAdd;
         _fieldManager.OnMoneySpend -= OnMoneySpend;
+        _uiController.OnStartGameButtonClick -= StartGame;
     }
 
     private void OnMoneyAdd(int value)
     {
-        print("add");
         Money += value;
     }
 
@@ -67,9 +100,11 @@ public class GameManager : MonoBehaviour
 
     private void SaveState()
     {
-        _gameData.Money = _money;
+        _gameData.Money = Money;
         _gameData.BuildingData = _fieldManager.GetBuildingData();
-        _saveSystem.SaveData();
+        // _saveSystem.SaveData();
+        // _saveSystem.SaveDataBin();
+        _saveSystem.SaveDataCloud();
     }
 }
 

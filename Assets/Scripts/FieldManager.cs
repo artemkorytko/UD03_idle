@@ -17,8 +17,8 @@ public class FieldManager : MonoBehaviour
     {
         foreach (var building in _upgradableBuildings)
         {
-            building.OnProcessFinished += OnMoneyAdd;
-            building.OnMoneySpend += OnMoneySpend;
+            building.OnProcessFinished += MoneyAdd;
+            building.OnMoneySpend += MoneySpend;
             
         }
     }
@@ -27,10 +27,19 @@ public class FieldManager : MonoBehaviour
     {
         foreach (var building in _upgradableBuildings)
         {
-            building.OnProcessFinished -= OnMoneyAdd;
-            building.OnMoneySpend -= OnMoneySpend;
-            
+            building.OnProcessFinished -= MoneyAdd;
+            building.OnMoneySpend -= MoneySpend;
         }
+    }
+
+    private void MoneyAdd(int value)
+    {
+        OnMoneyAdd?.Invoke(value);
+    }
+    
+    private void MoneySpend(float value)
+    {
+        OnMoneySpend?.Invoke(value);
     }
 
     public void Initialize(GameData gameData)

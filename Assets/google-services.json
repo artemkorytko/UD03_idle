@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "132402369318",
+    "firebase_url": "https://idle-test-90889-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "idle-test-90889",
+    "storage_bucket": "idle-test-90889.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132402369318:android:9cde25a897bee1810867e7",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.UD03_idle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132402369318-ni71icef6v9g3j77sia602alqnn6modc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxxHh2dNwdHa30u07JPg0yd9wBIuap-OY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132402369318-ni71icef6v9g3j77sia602alqnn6modc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
