@@ -30,7 +30,7 @@ namespace Idle
             }
         }
 
-        private void Awake()
+        private async void Awake()
         {
             if (Instance == null)
             {
@@ -45,9 +45,9 @@ namespace Idle
             _saveSystem = GetComponent<SaveSystem>();
             _fieldManager = GetComponentInChildren<FieldManager>();
             _uiController = FindObjectOfType<UiController>();
-            _saveSystem.Initialize();
+            await _saveSystem.Initialize();
             _gameData = _saveSystem.GameData;
-            //Money = _gameData.Money;
+            Money = _gameData.Money;
         }
 
         private void Start()

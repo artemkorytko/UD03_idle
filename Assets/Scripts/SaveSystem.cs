@@ -17,7 +17,7 @@ namespace Idle
         public GameData GameData => _gameData;
         private DatabaseReference _reference;
 
-        public async void Initialize()
+        public async UniTask Initialize()
         {
             // if (PlayerPrefs.HasKey(SAVE_KEY))
             // {
@@ -89,19 +89,15 @@ namespace Idle
                 {
                     if (task.IsFaulted)
                     {
-                        return false;
                     }
                     else if (task.IsCompleted)
                     {
                         DataSnapshot snapshot = task.Result;
                         // Do something with snapshot...
                         _gameData = JsonUtility.FromJson<GameData>(snapshot.GetRawJsonValue());
-                        return true;
                     }
-
-                    return false;
                 });
-            return false;
+            return _gameData != null;
         }
     }
 
