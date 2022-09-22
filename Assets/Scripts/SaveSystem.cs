@@ -1,5 +1,10 @@
 using System;
 using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Firebase.Database;
+using Firebase.Extensions;
+using Cysharp.Threading.Tasks;
 
 namespace Idle
 {
@@ -7,22 +12,33 @@ namespace Idle
     {
         private const string SAVE_KEY = "GameData";
         private GameData _gameData;
-
+        private string _filePath;
+        private DatabaseReference _reference;
         public GameData GameData => _gameData;
-
-        private void Awake()
+        
+        public async UniTask Initialize()
         {
-            _gameData = new GameData();
-            SaveData();
-        }
-
-        public void Initialize()
-        {
-            if (PlayerPrefs.HasKey(SAVE_KEY))
-            {
-                LoadData();
-            }
-            else
+            // if (PlayerPrefs.HasKey(SAVE_KEY))
+            // {
+            //     LoadData();
+            // }
+            // else
+            // {
+            //    
+            // }
+            // _filePath = Application.persistentDataPath + "/save.data";
+            //
+            //
+            // if (File.Exists(_filePath))
+            // {
+            //     LoadDataBin();
+            // }
+            // else
+            // {
+            //     _gameData = new GameData();
+            // }
+            _reference = FirebaseDatabase.DefaultInstance.RootReference;
+            if (!await LoadDataCloud())
             {
                 _gameData = new GameData();
             }
@@ -38,6 +54,54 @@ namespace Idle
         {
             string json = JsonUtility.ToJson(_gameData);
             PlayerPrefs.SetString(SAVE_KEY,json);
+        }
+
+        private void LoadDataBin()
+        {
+            if (File.Exists(_filePath))
+            {
+                FileStream dataStream = new FileStream(_filePath, FileMode.Open);
+                BinaryFormatter converter = new BinaryFormatter();
+                _gameData = converter.Deserialize(dataStream) as GameData;
+                dataStream.Close();
+            }
+        }
+
+        public void SaveDataBin()
+        {
+            FileStream dataStream = new FileStream(_filePath, FileMode.Create);
+            BinaryFormatter converter = new BinaryFormatter();
+            converter.Serialize(dataStream,_gameData);
+            dataStream.Close();
+        }
+
+        public void SaveDataCloud()
+        {
+            string json = JsonUtility.ToJson(_gameData);
+            _reference.Child("users").Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
+        }
+
+        private async UniTask<bool> LoadDataCloud()
+        {
+            await FirebaseDatabase.DefaultInstance
+                .GetReference($"users/{SystemInfo.deviceUniqueIdentifier}")
+                .GetValueAsync().ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        return false;
+                    }
+                    else if (task.IsCompleted)
+                    {
+                        DataSnapshot snapshot = task.Result;
+                        // Do something with snapshot...
+                        _gameData = JsonUtility.FromJson<GameData>(snapshot.GetRawJsonValue());
+                        return true;
+                    }
+
+                    return false;
+                });
+            return false;
         }
     }
 

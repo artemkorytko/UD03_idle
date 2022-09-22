@@ -30,7 +30,7 @@ namespace Idle
             }
         }
 
-        private void Awake()
+        private async void Awake()
         {
             if (Instance == null)
             {
@@ -45,7 +45,7 @@ namespace Idle
             _saveSystem = GetComponent<SaveSystem>();
             _fieldManager = GetComponentInChildren<FieldManager>();
             _uiController = FindObjectOfType<UiController>();
-            _saveSystem.Initialize();
+           await _saveSystem.Initialize();
             _gameData = _saveSystem.GameData;
             Money = _gameData.Money;
         }
@@ -99,9 +99,9 @@ namespace Idle
         {
             _gameData.Money = Money;
             _gameData.BuildingData = _fieldManager.GetBuildingData();
-             _saveSystem.SaveData();
-            // _saveSystem.SaveDataBin();
-            //_saveSystem.SaveDataCloud();
+             //_saveSystem.SaveData();
+            //_saveSystem.SaveDataBin();
+            _saveSystem.SaveDataCloud();
         }
 
         public void DoQuit()
