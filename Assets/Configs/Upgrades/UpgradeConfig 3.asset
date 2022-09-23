@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f01d1fc859414596b6bfb585064310, type: 3}
   m_Name: UpgradeConfig 3
   m_EditorClassIdentifier: 
-  model:
-    m_AssetGUID: b745532e76e31c642b68af18d564cfd2
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  key: toy_factory
   processResult: 6

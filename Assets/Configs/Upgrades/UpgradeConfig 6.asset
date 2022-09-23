@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f01d1fc859414596b6bfb585064310, type: 3}
   m_Name: UpgradeConfig 6
   m_EditorClassIdentifier: 
-  model:
-    m_AssetGUID: 9a7fc073fc9ea674288eae45b9dbd4e9
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  key: industrial_factory
   processResult: 16

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -49,6 +50,7 @@ public class UpgradableBuilding : MonoBehaviour
         if (!IsUnlock)
         {
             IsUnlock = true;
+            AnalyticSystem.Instance.BuyBuild();
             SetModel(Level);
             UpdateButtonState();
             OnMoneySpend?.Invoke(config.UnlockPrice);
@@ -57,10 +59,11 @@ public class UpgradableBuilding : MonoBehaviour
 
         if (config.IsUpgradeExist(Level + 1))
         {
+            AnalyticSystem.Instance.UpgradeBuild(name, Level);
+            OnMoneySpend?.Invoke(GetCost(Level));
             Level++;
             SetModel(Level);
             UpdateButtonState();
-            OnMoneySpend?.Invoke(GetCost(Level));
         }
     }
     
@@ -88,10 +91,18 @@ public class UpgradableBuilding : MonoBehaviour
         var upgradeConfig = config.GetUpgrade(level);
         if (_currentModel != null)
         {
+           await _currentModel.transform.DOScaleY(0,0.3f);
             Addressables.ReleaseInstance(_currentModel);
         }
 
-        _currentModel = await Addressables.InstantiateAsync(upgradeConfig.Model, buildingParent);
+        _currentModel = await Addressables.InstantiateAsync(upgradeConfig.Key, buildingParent);
+        var scale = _currentModel.transform.localScale;
+        var temp = scale.y;
+        scale.y = 0;
+        _currentModel.transform.localScale = scale;
+        var fx = Instantiate(config.BuildEffect);
+        fx.transform.position = _currentModel.transform.position;
+        await _currentModel.transform.DOScaleY(temp, 0.3f);
 
         if(_timerCoroutine==null)
             _timerCoroutine = StartCoroutine(Timer());

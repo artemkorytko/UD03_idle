@@ -17,28 +17,28 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 44417067a45e6f942b802abf97c8a0e9
   m_SerializeEntries:
-  - m_GUID: bc3acaa989345d24e8b09eac0fd6516e
-    m_Address: Assets/Prefabs/Buildings/sawmill.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 51b79e679e226cd478a5ebb9b07acb06
-    m_Address: Assets/Prefabs/Buildings/electronic_store.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: b9de1cf2f9412c149a49c3a60de113cb
-    m_Address: Assets/Prefabs/Buildings/electronics_factory.prefab
+    m_Address: electronic_store
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: b745532e76e31c642b68af18d564cfd2
-    m_Address: Assets/Prefabs/Buildings/toy_factory.prefab
+    m_Address: toy_factory
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 60810f98ad8a65148b9693d4e732620b
-    m_Address: Assets/Prefabs/Buildings/appliances_factory.prefab
+    m_Address: appliances_factory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b9de1cf2f9412c149a49c3a60de113cb
+    m_Address: electronics_factory
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 9a7fc073fc9ea674288eae45b9dbd4e9
-    m_Address: Assets/Prefabs/Buildings/industrial_factory.prefab
+    m_Address: industrial_factory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc3acaa989345d24e8b09eac0fd6516e
+    m_Address: sawmill
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

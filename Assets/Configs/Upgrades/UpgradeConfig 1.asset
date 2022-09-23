@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f01d1fc859414596b6bfb585064310, type: 3}
   m_Name: UpgradeConfig 1
   m_EditorClassIdentifier: 
-  model:
-    m_AssetGUID: bc3acaa989345d24e8b09eac0fd6516e
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  key: sawmill
   processResult: 1

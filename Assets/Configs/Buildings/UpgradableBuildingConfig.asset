@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ad9000426f4bb7be8ff2c5707d94ed, type: 3}
   m_Name: UpgradableBuildingConfig
   m_EditorClassIdentifier: 
+  buildEffect: {fileID: 7747643327197190303, guid: 70a2c0fc1733cc84c8762c75752b0b30, type: 3}
   unlockPrice: 30
   defaultUpgradeCoast: 10
   costMultiplier: 1.7

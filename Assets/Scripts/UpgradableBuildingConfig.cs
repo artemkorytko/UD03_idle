@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UpgradableBuildingConfig", menuName = "Config/UpgradableBuildingConfig", order = 0)]
 public class UpgradableBuildingConfig : ScriptableObject
 {
+    [SerializeField] private ParticleSystem buildEffect;
     [SerializeField] private float unlockPrice = 30;
     [SerializeField] private float defaultUpgradeCoast = 10;
     [SerializeField] private float costMultiplier = 1.7f;
@@ -14,6 +15,8 @@ public class UpgradableBuildingConfig : ScriptableObject
     public float DefaultUpgradeCoast => defaultUpgradeCoast;
 
     public float CostMultiplier => costMultiplier;
+
+    public ParticleSystem BuildEffect => buildEffect;
 
     public bool IsUpgradeExist(int index)
     {

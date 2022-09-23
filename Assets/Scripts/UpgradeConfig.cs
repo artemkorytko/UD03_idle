@@ -4,9 +4,9 @@ using UnityEngine.AddressableAssets;
 [CreateAssetMenu(fileName = "UpgradeConfig", menuName = "Config/UpgradeConfig", order = 0)]
 public class UpgradeConfig : ScriptableObject
 {
-    [SerializeField] private AssetReference model;
+    [SerializeField] private string key;
     [SerializeField] private int processResult;
 
-    public AssetReference Model => model;
+    public string Key => key;
     public int ProcessResult => processResult;
 }

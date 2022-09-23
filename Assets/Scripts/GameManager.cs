@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
+        AnalyticSystem.Instance.StartGame();
         _fieldManager.Initialize(_gameData);
         _uiController.ShowGameScreen();
     }
