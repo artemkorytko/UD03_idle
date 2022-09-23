@@ -18,14 +18,14 @@ namespace Idle
         
         public async UniTask Initialize()
         {
-            // if (PlayerPrefs.HasKey(SAVE_KEY))
-            // {
-            //     LoadData();
-            // }
-            // else
-            // {
-            //    
-            // }
+            if (PlayerPrefs.HasKey(SAVE_KEY))
+            {
+                LoadData();
+            }
+            else
+            {
+                _gameData = new GameData();
+            }
             // _filePath = Application.persistentDataPath + "/save.data";
             //
             //
@@ -37,11 +37,11 @@ namespace Idle
             // {
             //     _gameData = new GameData();
             // }
-            _reference = FirebaseDatabase.DefaultInstance.RootReference;
-            if (!await LoadDataCloud())
-            {
-                _gameData = new GameData();
-            }
+            //_reference = FirebaseDatabase.DefaultInstance.RootReference;
+            // if (!await LoadDataCloud())
+            // {
+            //    
+            // }
         }
         
         public void LoadData()
@@ -89,19 +89,15 @@ namespace Idle
                 {
                     if (task.IsFaulted)
                     {
-                        return false;
                     }
                     else if (task.IsCompleted)
                     {
                         DataSnapshot snapshot = task.Result;
                         // Do something with snapshot...
                         _gameData = JsonUtility.FromJson<GameData>(snapshot.GetRawJsonValue());
-                        return true;
                     }
-
-                    return false;
                 });
-            return false;
+            return _gameData != null;
         }
     }
 

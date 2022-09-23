@@ -99,9 +99,9 @@ namespace Idle
         {
             _gameData.Money = Money;
             _gameData.BuildingData = _fieldManager.GetBuildingData();
-             //_saveSystem.SaveData();
+             _saveSystem.SaveData();
             //_saveSystem.SaveDataBin();
-            _saveSystem.SaveDataCloud();
+            //_saveSystem.SaveDataCloud();
         }
 
         public void DoQuit()

@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine.AddressableAssets;
 
 namespace Idle
@@ -55,12 +56,12 @@ namespace Idle
                 return;
             }
 
-            if (config.IsUpgradeExist(Level + 1))
+            if (config.IsUpgradeExist(Level))
             {
-                Level++;
+               OnMoneySpend?.Invoke(GetCost(Level));
+               Level++;
                 SetModel(Level);
                 UpdateButtonState();
-               OnMoneySpend?.Invoke(GetCost(Level));
             }
         }
 
@@ -70,11 +71,19 @@ namespace Idle
 
             if (_currentModel != null)
             {
+               await _currentModel.transform.DOScaleY(0f, 0.5f);
                Addressables.ReleaseInstance(_currentModel);
             }
 
             _currentModel = await Addressables.InstantiateAsync(upgradeConfig.Model, buildingParent);
             _currentModel.transform.localPosition = Vector3.zero;
+            var scale = _currentModel.transform.localScale;
+            var temp = scale.y;
+            scale.y = 0f;
+            _currentModel.transform.localScale = scale;
+            var fx = Instantiate(config.BuildEffect);
+            fx.transform.position = _currentModel.transform.position;
+            await _currentModel.transform.DOScaleY(temp, 0.5f);
 
            if (_timerCoroutine == null)
                _timerCoroutine = StartCoroutine(Timer());
