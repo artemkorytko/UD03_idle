@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Firebase.Extensions;
 
 namespace Idle
 {
@@ -48,6 +51,58 @@ namespace Idle
            await _saveSystem.Initialize();
             _gameData = _saveSystem.GameData;
             Money = _gameData.Money;
+            FetchDataAsync();
+        }
+
+        public Task FetchDataAsync() {
+            Debug.Log("Fetching data...");
+            System.Threading.Tasks.Task fetchTask =
+                Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.FetchAsync(
+                    TimeSpan.Zero);
+            return fetchTask.ContinueWithOnMainThread(FetchComplete);
+        }
+        //[END fetch_async]
+        
+        public void DebugLog(string s) {
+            print(s);
+        }
+
+
+        void FetchComplete(Task fetchTask) {
+            if (fetchTask.IsCanceled) {
+                Debug.Log("Fetch canceled.");
+            } else if (fetchTask.IsFaulted) {
+                Debug.Log("Fetch encountered an error.");
+            } else if (fetchTask.IsCompleted) {
+                Debug.Log("Fetch completed successfully!");
+            }
+
+            var info = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.Info;
+            switch (info.LastFetchStatus) {
+                case Firebase.RemoteConfig.LastFetchStatus.Success:
+                    Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.ActivateAsync()
+                        .ContinueWithOnMainThread(task => {
+                            Debug.Log(String.Format("Remote data loaded and ready (last fetch time {0}).",
+                                info.FetchTime));
+                            var value = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue("MoneyOnStart").LongValue;
+                            Money = value;
+                        });
+
+                    break;
+                case Firebase.RemoteConfig.LastFetchStatus.Failure:
+                    switch (info.LastFetchFailureReason) {
+                        case Firebase.RemoteConfig.FetchFailureReason.Error:
+                            Debug.Log("Fetch failed for unknown reason");
+                            break;
+                        case Firebase.RemoteConfig.FetchFailureReason.Throttled:
+                            Debug.Log("Fetch throttled until " + info.ThrottledEndTime);
+                            break;
+                    }
+                    break;
+                case Firebase.RemoteConfig.LastFetchStatus.Pending:
+                    Debug.Log("Latest Fetch call still pending.");
+                    break;
+            }
         }
 
         private void Start()
@@ -99,9 +154,9 @@ namespace Idle
         {
             _gameData.Money = Money;
             _gameData.BuildingData = _fieldManager.GetBuildingData();
-             _saveSystem.SaveData();
+             //_saveSystem.SaveData();
             //_saveSystem.SaveDataBin();
-            //_saveSystem.SaveDataCloud();
+            _saveSystem.SaveDataCloud();
         }
 
         public void DoQuit()
