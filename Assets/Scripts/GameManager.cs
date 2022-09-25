@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Firebase.Analytics;
 using Firebase.Extensions;
 
 namespace Idle
@@ -107,7 +108,7 @@ namespace Idle
 
         private void Start()
         {
-            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
+            FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelStart);
             _fieldManager.OnMoneyAdd += OnMoneyAdd;
             _fieldManager.OnMoneySpend += OnMoneySpend;
             _uiController.ShowMenuScreen();

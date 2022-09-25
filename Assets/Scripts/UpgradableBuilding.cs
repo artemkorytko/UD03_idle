@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Firebase.Analytics;
 using UnityEngine.AddressableAssets;
 
 namespace Idle
@@ -62,6 +63,7 @@ namespace Idle
                Level++;
                 SetModel(Level);
                 UpdateButtonState();
+                FirebaseAnalytics.LogEvent("got_update",new Parameter("type","money"));
             }
         }
 
