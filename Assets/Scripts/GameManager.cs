@@ -107,6 +107,7 @@ namespace Idle
 
         private void Start()
         {
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
             _fieldManager.OnMoneyAdd += OnMoneyAdd;
             _fieldManager.OnMoneySpend += OnMoneySpend;
             _uiController.ShowMenuScreen();
